@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css"/>
+    
+
+
+    <!-- ================================================ -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script>
+        // "sign up" implies creating an account, login, and password, while "sign in" implies gaining access to the account by entering the previously created login name and password.
+
+
+
+
+        // Initialize Firebase
+        var firebaseConfig = {
+            apiKey: "AIzaSyD7T3yuB5CKtujYdL4TWJBPBgTwHnror6o",
+  authDomain: "smartcart-663c4.firebaseapp.com",
+  projectId: "smartcart-663c4",
+  storageBucket: "smartcart-663c4.appspot.com",
+  messagingSenderId: "76974861320",
+  appId: "1:76974861320:web:05797bb2bc370c63d635bd",
+  measurementId: "G-LJ5H3S11ME"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+        function signUp() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+                .then(function (userCredential) {
+                    console.log("User signed up:", userCredential.user);
+                    
+                })
+                .catch(function (error) {
+                    console.log("Sign up error:", error);
+                    
+                });
+        }
+
+        function signIn() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then(function (userCredential) {
+                    console.log("User signed in:", userCredential.user);
+                    // Add your custom logic after successful sign in
+                    var user = userCredential.user;
+                    alert(user.uid)
+          
+                })
+                .catch(function (error) {
+                    console.log("Sign in error:", error);
+                    // Handle sign in errors
+            
+                });
+        }
+
+        function signOut() {
+            firebase.auth().signOut()
+                .then(function () {
+                    console.log("User signed out");
+                    // Add your custom logic after successful sign out
+                })
+                .catch(function (error) {
+                    console.log("Sign out error:", error);
+                    // Handle sign out errors
+                });
+        }
+    </script>
+    <!-- ================================================ -->
+</head>
+<body>
+    
+    <div class="login-box">
+        <div class="login-header">
+            <header>Login</header>
+        </div>
+        <div class="input-box">
+            <input type="text" id="email" class="input-field"  placeholder="Email" autocomplete="off" required>
+        </div>
+        <div class="input-box">
+            <input type="password" id="password" class="input-field" placeholder="Password" autocomplete="off" required>
+        </div>
+        <div class="forgot">
+            <section>
+                <input type="checkbox" id="check">
+                <label for="check">Remember me</label>
+            </section>
+            <section>
+                <a href="#">Forgot password</a>
+            </section>
+        </div>
+        <div class="input-submit">
+            <button class="submit-btn" id="submit" onclick="signUp()"></button>
+            <label for="submit">Sign In</label>
+        </div>
+        <div class="sign-up-link">
+            <p>Don't have account? <a href="#">Sign Up</a></p>
+        </div>
+    </div>
+    
+<body>
+    
+</html>
